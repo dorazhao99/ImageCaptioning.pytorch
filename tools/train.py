@@ -1,3 +1,4 @@
+# Adapted from Luo et al.'s ImageCaptioning.pytorch repo
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
