@@ -34,6 +34,8 @@ parser.add_argument('--force', type=int, default=0,
                 help='force to evaluate no matter if there are results available')
 parser.add_argument('--device', type=str, default='cuda',
                 help='cpu or cuda')
+parser.add_argument('--save', type=str, default='vis/vis.json',
+                help='cpu or cuda')
 opts.add_eval_options(parser)
 opts.add_diversity_opts(parser)
 opt = parser.parse_args()
@@ -69,10 +71,11 @@ if opt.only_lang_eval == 1 or (not opt.force and os.path.isfile(pred_fn)):
                 os._exit(0)
         except:
             pass
-
+  
     predictions, n_predictions = torch.load(pred_fn)
-    lang_stats = eval_utils.language_eval(opt.input_json, predictions, n_predictions, vars(opt), opt.split)
-    print(lang_stats)
+#    lang_stats = eval_utils.language_eval(opt.input_json, predictions, n_predictions, vars(opt), opt.split)
+#    print(lang_stats)
+    print('here')
     os._exit(0)
 
 # At this point only_lang_eval if 0
@@ -122,4 +125,4 @@ if lang_stats:
 
 if opt.dump_json == 1:
     # dump the json
-    json.dump(split_predictions, open('vis/vis.json', 'w'))
+    json.dump(split_predictions, open(opt.save, 'w'))
